@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+       <style>
+        @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+        *, *::before, *::after {
+  box-sizing: border-box !important;
+}
+
+        body {
+            background-image: url('background.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            width: 90%;
+            margin: 0;
+            row-gap: 15px;
+            box-sizing: border-box;
+            overflow-x: hidden !important;
+        }
+        header { 
+            position: fixed;
+            top: 0;
+            display: flex;
+            column-gap: 40px;
+            background-color: transparent;
+            width: 50%;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 { 
+            color: black;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        button {
+            margin-top: 0.5rem !important;
+            all: unset;
+            border: none;
+            font-size: 28px;
+            background: transparent;
+            padding: 10px;
+            cursor: pointer;
+        }
+        button i {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        .whatsapp {
+            color : #25D366;
+            background: transparent;
+            border-radius: 50%;
+            padding: 10px;
+            
+        }
+        .phone { 
+            color: #00BFFF;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .instagram { 
+            color: #8A2BE2;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .facebook { 
+            color: #00008B;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        .catalog { 
+            position: relative;
+            width: 300px;
+            height: 300px;
+            overflow-y: hidden;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            display: flex;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .catalog1 { 
+            position: relative;
+            width: 300px;
+            height: 200px;
+            overflow-y: hidden;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            display: flex;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .image { 
+            position: relative;
+            flex : 0 0 100% ; 
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }       
+        img {
+             height: 12rem;
+             width: 50%;
+             border-radius: 10px;
+        }
+        .info { 
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 85%;
+            height: 90%;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            border-radius: 10px;
+            font-size: 16px;
+            padding: 10px;
+            pointer-events: none;
+            margin-left: 30px;
+        }
+        .image:hover .info { 
+            opacity: 1;
+        }
+        .indicator { 
+                text-align: center;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+            .dot { 
+                display: inline-block;
+                height: 10px;
+                width: 10px;
+                margin: 0 5px;
+                background-color: black;
+                border-radius: 50%;
+                transition: background-color 0.3s ease;
+                cursor: pointer;
+            }
+            .dot.active{
+                background-color: green;
+            }
+        .contact {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 40px;
+            margin-left: 20px;
+            direction: rtl;
+        }
+
+        .contact input {
+            padding: 10px 15px;
+            border: 2px solid #b3b3b3;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: right;
+        }
+
+        .contact input:focus {
+            border-color: #25D366;
+            box-shadow: 0 0 8px #25D36666;
+        }
+
+        .contact input.comments {
+            height: 80px;
+            resize: none;
+        }
+        ::-webkit-scrollbar {
+            width: 40px;
+            height: 35px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: url('fruit.png') no-repeat center center;
+            background-size: 50%; /* תוכל לשחק בין 50%-100% לפי הצורך */
+            border-radius: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(to right, #f9f7d9, #c2f0c2); 
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 844px) {
+            body { 
+                max-width: 844px;
+                overflow-x: hidden !important;
+            }
+            header {
+                margin-top: 5px;
+                margin-left: 37px;
+                width: 110%;
+                align-items: flex-start;
+                padding-bottom: 10px;
+                overflow-x: hidden;
+                background-color: transparent;
+                z-index: 1;
+                backdrop-filter: blur(3px)
+            }
+            .icon { 
+                margin-top: 15px;
+                margin-left: 35px;
+                display: flex;
+                column-gap : 20px;
+            }
+            .icon1 { 
+                display: flex;
+                margin-top: 10px;
+                margin-right: 35px;
+                column-gap: 25px;
+                
+            }
+            h1 {
+                background: linear-gradient(to right, #f70330, #ec0404);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 28px;
+                font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+                text-align: center;
+            }
+            .catalog-contanier {
+                position: relative;
+                padding-top: 40px; /* מקום לכותרת */
+                margin: -15px auto;
+                width: 90%;
+                max-width: 800px;
+                margin-bottom: -20px;
+            }
+            .catalog {
+                flex-wrap: nowrap;
+                justify-content: center;
+                justify-content: flex-start;
+            }
+            .catalog-contanier1 {
+                position: relative;
+                padding-top: 40px; /* מקום לכותרת */
+                margin: -15px auto;
+                width: 90%;
+                max-width: 800px;
+                margin-bottom: -20px;
+            }
+            .catalog1 {
+                flex-wrap: nowrap;
+                justify-content: center;
+                justify-content: flex-start;
+            }
+            .catalog-title { 
+                margin-top: -7px;
+                margin-bottom: -1px;
+                margin-left: 60%;
+                padding: 0 10px;
+                font-size: 20px;
+                font-weight: bold;
+                color: rgb(239, 157, 6);
+                text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.7);
+            }
+            .image {
+                width: 100%;
+                min-width: 150px;
+                margin-bottom: -50px;
+                margin-top: -50px;
+            }
+            
+            .contact {
+                width: 90%;
+                max-width: 300px;
+                margin-top: 20px;
+                margin-right: -0.5rem;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px); /* תמיכה בספארי */
+                background-color: transparent; 
+            }
+            .contact input{
+                background: transparent;
+                color : black;
+            }
+            input::placeholder{
+                color :black;
+                font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            }
+            .button {
+                font-size: 22px;
+                text-align: center;
+                width: 100px;
+                border: 3px solid black ; 
+                border-radius: 10px;
+                background-color: #25D366;
+            }
+            .button:hover{
+                transition: 0.5s;
+                background-color: greenyellow;
+                color: white;
+                border-radius: 30px;
+                border-color: green;
+            }
+            .about {
+                text-align: center;
+                background: #f9f9f9; /* צבע רקע בהיר ורך */
+                color: #333; /* טקסט בגוון כהה אך לא קשה מדי */
+                padding: 40px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                max-width: 700px;
+                margin: 70px 0 0 50px;
+                font-family: 'Arial', sans-serif;
+            }
+
+            .about h1 {
+                font-size: 2.2em;
+                font-weight: 600;
+                margin-bottom: 20px;
+                color: #4caf50; /* צבע ירוק עדין */
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .about h3 {
+                font-family: 'Poppins', sans-serif;
+                font-size: 1.5em;
+                color: #4CAF50; /* צבע ירוק רענן */
+                text-align: center;
+                margin-bottom: 20px;
+                font-weight: 500;
+                line-height: 1.4;
+                border-bottom: 2px dashed #4CAF50; /* קו תחתון עדין */
+                padding-bottom: 10px;
+            }
+
+
+            .about ul {
+                list-style-type: none;
+                padding: 0;
+                margin: 0;
+            }
+
+            .about ul li {
+                font-size: 1.1em;
+                font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                margin: 15px 0;
+                color: #555; /* צבע עדין לא טורדני */
+                padding-right: 30px; /* רווח מצד ימין */
+                position: relative;
+                line-height: 1.6;
+            }
+
+            .about ul li::after {
+                content: "🍍"; /* הוספתי סמל חמוד כמו פרי */
+                font-size: 1.5em;
+                position: absolute;
+                right: 10px; /* מיקום הסמל בצד ימין */
+                top: 0;
+                color: #4caf50; /* צבע ירוק שמתאים למגשי פירות */
+            }
+            .whatsapp-btn {
+                position: fixed;
+                bottom: 40px; /* Distance from the bottom */
+                left: 20px; /* Distance from the right */
+                background-color: #25D366; /* WhatsApp green color */
+                color: white;
+                border: none;
+                border-radius: 50%; /* Make it circular */
+                padding: 15px 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for 3D effect */
+                font-size: 24px; /* Icon size */
+                transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transitions */
+                animation: scaleAnimation 2s infinite alternate;
+            }
+            .whatsapp-btn:hover {
+                transform: scale(1.1); /* Slightly grow when hovered */
+                opacity: 0.8; /* Fade slightly on hover */
+            }
+
+            .whatsapp-btn i {
+                font-size: 28px; /* WhatsApp icon size */
+            }
+
+            /* Make sure it stays in the fixed position when scrolling */
+            .whatsapp-btn:active {
+                transform: scale(0.9); /* Slight shrink effect when clicked */
+            }
+            @keyframes scaleAnimation {
+                0% {
+                transform: scale(1); /* Default size */
+                }
+                50% {
+                transform: scale(1.1); /* Grow slightly */
+                }
+                100% {
+                transform: scale(1); /* Shrink back to normal */
+                }
+            }
+            .about1 {
+                text-align: center; /* ממורכז את הטקסט */
+                padding: 10px;
+                margin-left: 10%;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                background-color: #f1fff0; /* צבע רקע רך */
+                border-radius: 10px; /* פינות מעוגלות */
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* צללים רכים */
+                max-width: 80%; /* מקסימום רוחב של 80% */
+                font-family: 'Arial', sans-serif; /* גופן ברור וקל לקריאה */
+            }
+
+            .about1 h4 {
+                font-family: 'Poppins', sans-serif;
+                font-size: 22px;
+                color: #F7A800;
+                text-align: center;
+                line-height: 1.5;
+                font-weight: 500;
+                margin: 10px 0;
+                padding: 10px 0;
+                border-bottom: 2px solid #E5E5E5;
+                transition: all 0.3s ease;
+                direction: rtl;
+            }
+            .about1 a { 
+                text-decoration: none;
+            }
+            .whatsapp1 {
+                background-color: #25d366; /* צבע כפתור WhatsApp */
+                color: white; /* צבע טקסט לבן */
+                font-size: 18px; /* גודל טקסט נעים */
+                padding: 12px 30px; /* ריפוד רחב בכפתור */
+                border: none; /* אין גבול לכפתור */
+                border-radius: 25px; /* פינות מעוגלות */
+                cursor: pointer; /* הופך את הסמן לאצבע */
+                transition: background-color 0.3s ease; /* אנימציה רכה על הצבע */
+            }
+        }
+       </style>
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+       <title>פריקאסו</title>
+    </head>
+    <body>
+        <header>
+            <div class="icon">
+            <a href="http://wa.me/972772018471"><button class="whatsapp"><i class="fa fa-whatsapp"></i></button></a>
+            <a href="tel:972772018471"><button class="phone"><i class="fa fa-phone"></i></button></a>
+            <img src="logo.png" style="height: 10%; width: 33%; margin-right: -40px; padding-right: -20%; ">
+            </div>
+            <div class="icon1">
+            <a href="https://www.instagram.com/pri_casso"><button class="instagram"><i class="fa fa-instagram"></i></button></a>
+            <a href="https://www.facebook.com/people/פריקאסו-מגשי-פירות/pfbid0vqkSGkfGYXJ5oLhMmLQL6PQvmuxZnYYnMmBPZZMshbVXD9Yw1eKecn4DgCXZv62Ql/" target="_blank"><button class="facebook"><i class="fa fa-facebook"></i></button></a>
+            </div>
+        </header>
+        <div class="about">
+            <h1 >מגשי פירות</h1>
+            <h1 style="margin-top: 0px;font-size: 28px ;background: linear-gradient(45deg , rgb(190, 132, 24) , yellow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Varela Round', sans-serif;
+            "> עיצוב מהודר פירות טריים</h1>
+            <h3>משלוח מהיר, מחיר מפתיע</h3>
+            <ul>
+                <li>משלוחים לכל הארץ</li>
+                <li>עיצוב ייחודי, כל מגש וואו</li>
+                <li>מחירים מיוחדים לפסח</li>
+                <li>מתנה או לפינוק עצמי</li>
+            </ul>
+        </div>
+        <div class="catalog-contanier">
+            <p class="catalog-title">המארזים שלנו</p>
+        <div class="catalog">
+            <div class="image">
+                <img src="picture5.png" style="transform: scale(3);width: 100%; margin-top: 30px ;">
+                <div class="indicator">
+                
+                </div>
+            </div>
+            <div class="image">
+                <img src="picture2.png" style="transform: rotate(-90deg) scale(2.3); height: 100%; ">
+                
+            </div>
+            <div class="image">
+                <img src="picture6.png" style="transform: scale(5) rotate(90deg); height: 100%; margin-bottom: 90px; margin-right: 95px;">
+                
+            </div>
+            <div class="image">
+                <img src="picture7.png" style="transform: scale(6) ; height: 100%; margin-top: 60px; margin-left: 60px;">
+               
+            </div>
+        </div>
+        </div>
+        <div class="catalog-contanier1">
+            <p class="catalog-title">התוספות שלנו</p>
+        <div class="catalog1" >
+            <div class="image">
+                <img src="perlin.png" style="transform: scale(0.7); width: 100%; margin-top: 30px;">
+                
+            </div>
+            <div class="image">
+                <img src="picure9.png" style="transform: scale(1); margin-top: 25px;">               
+            </div>
+            <div class="image">
+                <img src="baloon.png" style="transform: scale(3) ;width: 100%; margin-top: 250px; margin-left: 35px;">
+                
+            </div>
+        </div>
+        </div>
+        <div class="about1" style="margin-top: 30px;">
+            <h4>רוצה מגש שיתפוס את העין ויעשה רושם? 🥂</h4>
+            <a href="http://wa.me/972772018471"><button class="whatsapp1" style="direction: rtl;">לחץ להזמנה !</button></a>
+            
+        </div>
+        <div class="contact">
+            <form action="https://formsubmit.co/pricassofruits@gmail.com" method="POST">
+              <h1 style="font-size: 24px; margin-top: -2px; background: linear-gradient(to right, #056e13, rgb(0, 255, 8)); -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;">השאר פרטים ונחזור אליך!</h1>
+          
+              <!-- מונע קפצ'ה -->
+              <input type="hidden" name="_captcha" value="false">
+          
+              <!-- כתובת לעמוד תודה לאחר השליחה (אפשר לשים עמוד תודה משלך, או פשוט להסיר את זה) -->
+              <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html"> -->
+          
+              <label for="first-name">שם פרטי:</label>
+              <input type="text" id="first-name" name="First Name" required>
+          
+              <label for="last-name">שם משפחה:</label>
+              <input type="text" id="last-name" name="Last Name" required>
+          
+              <label for="email">כתובת אימייל:</label>
+              <input type="email" id="email" name="Email" required>
+          
+              <label for="phone">טלפון:</label>
+              <input type="text" id="phone" name="Phone" required>
+          
+              <label for="comments">הערות:</label>
+              <input id="comments" name="Comments">
+          
+              <button type="submit" class="button">שלח</button>
+          
+              <p style="font-size: 12px;">*הפרטים ישמשו רק ליצירת קשר. פרטיותך נשמרת.</p>
+            </form>
+          </div>
+          
+          
+          
+        
+        <a href="http://wa.me/972772018471"><button class="whatsapp-btn"><i class="fa fa-whatsapp"></i></button></a>
+    </body>
+       
+</html>
